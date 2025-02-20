@@ -1,0 +1,197 @@
+/* Reset e fontes */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #6b73ff 0%, #000dff 100%);
+    color: #333;
+    overflow-x: hidden;
+  }
+  
+  /* Card para login */
+  .card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    width: 300px;
+    margin: 50px auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    text-align: center;
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+  }
+  .card h1 {
+    margin-bottom: 20px;
+  }
+  .card input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  .card button {
+    width: 100%;
+    padding: 10px;
+    background: #000dff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .card button:hover {
+    background: #333;
+  }
+  #error-message {
+    color: red;
+    margin-top: 10px;
+  }
+  
+  /* Dashboard */
+  #dashboard {
+    max-width: 800px;
+    margin: 20px auto;
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    opacity: 0;
+    animation: fadeIn 0.5s forwards 0.2s; /* Atraso para dar tempo ao card */
+  }
+  
+  /* Tabela de produtos */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    opacity: 0;
+    animation: fadeIn 0.5s forwards 0.3s; /* Atraso para dar tempo para a dashboard aparecer */
+  }
+  table th, table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+  table th {
+    background: #f4f4f4;
+  }
+  table tbody tr {
+    transition: background 0.3s;
+  }
+  table tbody tr:hover {
+    background: #f0f0f0;
+  }
+  
+  /* Botões de ações */
+  .btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .btn-add {
+    background: #28a745;
+    color: #fff;
+  }
+  .btn-add:hover {
+    background: #218838;
+  }
+  .btn-logout {
+    background: #dc3545;
+    color: #fff;
+  }
+  .btn-logout:hover {
+    background: #c82333;
+  }
+  .btn-edit {
+    background: #ffc107;
+    color: #fff;
+  }
+  .btn-edit:hover {
+    background: #e0a800;
+  }
+  .btn-delete {
+    background: #dc3545;
+    color: #fff;
+  }
+  .btn-delete:hover {
+    background: #c82333;
+  }
+  
+  /* Modal */
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
+  }
+  .modal.active {
+    visibility: visible;
+    opacity: 1;
+  }
+  .modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    position: relative;
+    animation: modalSlideIn 0.5s ease-out;
+  }
+  .modal-content h2 {
+    margin-bottom: 15px;
+  }
+  .modal-content input {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  .close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  /* Animações */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes modalSlideIn {
+    from {
+      transform: translateY(-30px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  .hidden {
+    display: none;
+  }
+  

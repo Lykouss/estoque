@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ElectroStock</title>
+  
+  <!-- Google Fonts (opcional) -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- CSS customizado -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Scripts do Firebase Hosting (compat) -->
+  <script defer src="/__/firebase/11.3.1/firebase-app-compat.js"></script>
+  <script defer src="/__/firebase/11.3.1/firebase-auth-compat.js"></script>
+  <script defer src="/__/firebase/11.3.1/firebase-firestore-compat.js"></script>
+  <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+</head>
+<body>
+  <!-- Tela de Login -->
+  <div id="login" class="card">
+      <h1>Login</h1>
+      <input type="email" id="email" placeholder="Email">
+      <input type="password" id="password" placeholder="Senha">
+      <button onclick="login()">Entrar</button>
+      <p id="error-message"></p>
+  </div>
+
+  <!-- Dashboard -->
+  <div id="dashboard" class="hidden">
+      <div class="dashboard-header">
+        <h1>Dashboard</h1>
+        <button onclick="logout()" class="btn btn-logout">Sair</button>
+      </div>
+      <div class="actions">
+        <button onclick="openAddModal()" class="btn btn-add">Adicionar Produto</button>
+      </div>
+      <table>
+          <thead>
+              <tr>
+                  <th>Nome</th>
+                  <th>Quantidade</th>
+                  <th>Ações</th>
+              </tr>
+          </thead>
+          <tbody id="product-table">
+              <!-- Produtos serão inseridos aqui -->
+          </tbody>
+      </table>
+  </div>
+
+  <!-- Modal de Adição/Edição -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeModal()">×</button>
+      <h2 id="modal-title">Adicionar Produto</h2>
+      <input type="text" id="modal-product-name" placeholder="Nome do Produto">
+      <input type="number" id="modal-product-quantity" placeholder="Quantidade">
+      <button onclick="saveProduct()" class="btn btn-add" style="width:100%;">Salvar</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
