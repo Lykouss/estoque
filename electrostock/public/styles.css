@@ -30,6 +30,13 @@ body {
   align-items: center;
 }
 
+/* Media query para telas ainda menores (ex: smartphones) */
+@media (max-width: 576px) {
+  .card {
+    width: 270px;
+  }
+}
+
 .card h1 {
   font-size: 24px;
   margin-bottom: 25px;
@@ -60,7 +67,7 @@ body {
 .card label {
   display: flex;
   align-items: center;
-  gap: 6px; /* Espaço entre checkbox e texto */
+  gap: 6px;
   font-size: 14px;
   color: #E0E0E0;
   cursor: pointer;
@@ -70,12 +77,12 @@ body {
 .card label input[type="checkbox"] {
   width: 16px;
   height: 16px;
-  border: 2px solid #6200EE; /* Cor do botão principal */
+  border: 2px solid #6200EE;
   border-radius: 4px;
-  background: #1E1E1E; /* Fundo escuro como o resto do site */
+  background: #1E1E1E;
   cursor: pointer;
   position: relative;
-  appearance: none; /* Mantém a personalização */
+  appearance: none;
   transition: all 0.3s ease;
 }
 
@@ -153,22 +160,54 @@ body {
   font-size: 28px;
 }
 
+.search-bar-wrapper {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-right: 120px;
+}
+
 #search-bar {
   width: 100%;
-  max-width: 320px;
+  max-width: 520px;
   padding: 10px;
   border: 1px solid #333;
   border-radius: 8px;
   background: #2C2C2C;
-  margin-top: 10px;
   color: white;
   transition: border 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 0;
+}
+
+/* Media query para telas menores (ex: tablets) */
+@media (max-width: 768px) {
+  .search-bar-wrapper {
+    margin-right: 20px;
+  }
+
+  #search-bar {
+    max-width: 100%;
+  }
+}
+
+/* Media query para telas ainda menores (ex: smartphones) */
+@media (max-width: 576px) {
+  .dashboard-header {
+    justify-content: center;
+  }
+
+  .search-bar-wrapper {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 #search-bar:focus {
-  outline: none; /* Remove a linha branca padrão */
-  border-color: #03DAC6; /* Deixa a borda roxa */
-  box-shadow: 0 0 5px #03DAC6; /* Adiciona um brilho sutil roxo */
+  outline: none;
+  border-color: #03DAC6;
+  box-shadow: 0 0 5px #03DAC6;
 }
 
 .btn {
@@ -183,10 +222,11 @@ body {
 .btn-add {
   background: #03DAC6;
   color: white;
+  margin-bottom: 10px;
 }
 
 .btn-logout {
-  background: #CF6679;
+  background: #d63f3f;
   color: white;
 }
 
@@ -198,6 +238,7 @@ body {
 .btn-delete {
   background: #FF5252;
   color: white;
+  margin-top: 5px;
 }
 
 .btn:hover {
@@ -284,15 +325,15 @@ body {
 
 /* Personalizando as setas do input number */
 .modal input[type="number"] {
-  -moz-appearance: textfield; /* Remove setas padrão no Firefox */
-  text-align: left; /* Mantém o texto alinhado à esquerda */
-  padding-left: 10px; /* Espaço interno para o texto */
+  -moz-appearance: textfield;
+  text-align: left;
+  padding-left: 10px;
 }
 
 .modal input[type="number"]::-webkit-outer-spin-button,
 .modal input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
-  margin: 0; /* Remove setas padrão no Chrome e Edge */
+  margin: 0;
 }
 
 /* Criando botões personalizados para aumentar/diminuir */
@@ -305,8 +346,8 @@ body {
 }
 
 .input-number-container input {
-  width: 70px; /* Ajusta o tamanho do input */
-  padding-right: 30px; /* Deixa espaço para os botões */
+  width: 70px;
+  padding-right: 30px;
 }
 
 .input-number-container .btn-number {
@@ -353,9 +394,9 @@ body {
 
 /* Quando o usuário clicar no input */
 .modal input:focus {
-  outline: none; /* Remove a linha branca padrão */
-  border-color: #03DAC6; /* Deixa a borda roxa */
-  box-shadow: 0 0 5px #03DAC6; /* Adiciona um brilho sutil roxo */
+  outline: none;
+  border-color: #03DAC6;
+  box-shadow: 0 0 5px #03DAC6;
 }
 
 .modal.active {
@@ -470,9 +511,11 @@ tr:last-child td {
 
 /* Botão de abrir a bandeja */
 .menu-toggle {
+  margin-left: 10px;
   position: fixed;
   top: 15px;
   left: 15px;
+  width: 45px;
   background: #6200EE;
   color: white;
   border: none;

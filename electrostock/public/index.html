@@ -4,152 +4,142 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ElectroStock</title>
-  
-  <!-- Google Fonts -->
+
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-  
-  <!-- CSS -->
+
   <link rel="stylesheet" href="styles.css">
 
-  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/11.3.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/11.3.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/11.3.1/firebase-firestore-compat.js"></script>
 </head>
 <body>
   <body>
-    <!-- Tela de Cadastro de Empresa -->
     <div id="register" class="card hidden">
-        <h1>Cadastro de Empresa</h1>
-        <input type="text" id="company-name" placeholder="Nome da Empresa">
-        <input type="text" id="cnpj" placeholder="CNPJ">
-        <input type="text" id="owner-name" placeholder="Nome da Pessoa Jurídica">
-        <input type="text" id="cpf" placeholder="CPF da Pessoa Jurídica">
-        <input type="email" id="register-email" placeholder="Email">
-        <input type="password" id="register-password" placeholder="Senha">
-        <input type="password" id="confirm-password" placeholder="Confirme a Senha">
-        <button onclick="registerCompany()">Cadastrar</button>
-        <p id="register-error-message"></p>
-        <p>Já tem uma conta? <a onclick="showLogin()"><b style="color: #6200EE; text-shadow: 0 2px 7px rgb(255, 255, 255, 0.178);">Faça login</b></a></p>
+      <h1>Cadastro de Empresa</h1>
+      <input type="text" id="company-name" placeholder="Nome da Empresa">
+      <input type="text" id="cnpj" placeholder="CNPJ">
+      <input type="text" id="owner-name" placeholder="Nome da Pessoa Jurídica">
+      <input type="text" id="cpf" placeholder="CPF da Pessoa Jurídica">
+      <input type="email" id="register-email" placeholder="Email">
+      <input type="password" id="register-password" placeholder="Senha">
+      <input type="password" id="confirm-password" placeholder="Confirme a Senha">
+      <button onclick="registerCompany()">Cadastrar</button>
+      <p id="register-error-message"></p>
+      <p>Já tem uma conta? <a onclick="showLogin()"><b style="color: #6200EE; text-shadow: 0 2px 7px rgb(255, 255, 255, 0.178);">Faça login</b></a></p>
     </div>
   </body>
 
-  <!-- Tela de Login -->
   <body>
-  <!-- Tela de Login -->
   <div id="login" class="card">
-      <h1>Login</h1>
-      <input type="email" id="email" placeholder="Email">
-      <input type="password" id="password" placeholder="Senha">
-      <label>
-        <input type="checkbox" id="remember-me"> Lembre-se de mim
-      </label>
-      <button onclick="login()">Entrar</button>
-      <p id="loading-message" style="display: none;">Carregando...</p>
-      <p id="error-message"></p>
-      <p>Ainda não tem uma conta? <a onclick="showRegister()"><b style="color: #6200EE; text-shadow: 0 2px 7px rgba(255, 255, 255, 0.178);">Cadastre-se</b></a></p>
+    <h1>Login</h1>
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Senha">
+    <label>
+      <input type="checkbox" id="remember-me"> Lembre-se de mim
+    </label>
+    <button onclick="login()">Entrar</button>
+    <p id="loading-message" style="display: none;">Carregando...</p>
+    <p id="error-message"></p>
+    <p>Ainda não tem uma conta? <a onclick="showRegister()"><b style="color: #6200EE; text-shadow: 0 2px 7px rgba(255, 255, 255, 0.178);">Cadastre-se</b></a></p>
   </div>
 
-  <!-- Dashboard -->
   <div id="dashboard" class="hidden">
-      <div class="dashboard-header">
-        <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
-        <h1>Dashboard</h1>
+    <div class="dashboard-header">
+      <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+      <h1>Dashboard</h1>
+      <div class="search-bar-wrapper">
         <input type="text" id="search-bar" placeholder="Pesquisar">
-        <button onclick="logout()" class="btn btn-logout">Sair</button>
+      </div>
+    </div>
+
+    <div id="sidebar" class="sidebar">
+      <button onclick="showDashboard()">Produtos</button>
+      <button onclick="showEmployees()">Funcionários</button>
+      <button onclick="showLog()">Log</button>
+      <button onclick="logout()">Logout</button>
+    </div>
+
+    <div id="dashboard-content">
+      <div id="products-section">
+        <h2>Gerenciamento de Produtos</h2>
+        <button onclick="openAddModal()" class="btn btn-add">Adicionar Produto</button>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Quantidade</th>
+                <th>Categoria</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="product-table"></tbody>
+          </table>
+        </div>
       </div>
 
-      <!-- Bandeja Expansível -->
-      <div id="sidebar" class="sidebar">
-        <button onclick="showDashboard()">Dashboard</button>
-        <button onclick="showEmployees()">Funcionários</button>
-        <button onclick="showLog()">Log</button>
-      </div>
+      <div id="employees-section" class="hidden">
+        <h2>Gerenciamento de Funcionários</h2>
+        <button class="btn btn-add" onclick="openAddEmployeeModal()">Adicionar Funcionário</button>
 
-      <div id="dashboard-content">
-        <div id="products-section">
-          <button onclick="openAddModal()" class="btn btn-add">Adicionar Produto</button>
-          <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Quantidade</th>
-                        <th>Categoria</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody id="product-table"></tbody>
-            </table>
+        <div id="modal-employee" class="modal">
+          <div class="modal-content">
+            <h2 id="modal-employee-title">Adicionar Funcionário</h2>
+            <input type="text" id="modal-employee-name" placeholder="Nome">
+            <input type="email" id="modal-employee-email" placeholder="Email">
+            <input type="password" id="modal-employee-password" placeholder="Senha">
+
+            <select id="modal-employee-role">
+              <option value="dono">Dono</option>
+              <option value="gerente">Gerente</option>
+              <option value="supervisor">Supervisor</option>
+              <option value="estoquista">Estoquista</option>
+              <option value="leitor">Leitor</option>
+            </select>
+
+            <button onclick="saveEmployee()">Salvar</button>
+            <button onclick="closeEmployeeModal()">Cancelar</button>
           </div>
         </div>
 
-        <!-- Seção Funcionários -->
-        <div id="employees-section" class="hidden">
-          <h2>Gerenciamento de Funcionários</h2>
-          <button class="btn btn-add" onclick="openAddEmployeeModal()">Adicionar Funcionário</button>
-
-          <!-- Modal para adicionar funcionário -->
-          <div id="modal-employee" class="modal">
-            <div class="modal-content">
-              <h2 id="modal-employee-title">Adicionar Funcionário</h2>
-              <input type="text" id="modal-employee-name" placeholder="Nome">
-              <input type="email" id="modal-employee-email" placeholder="Email">
-              <input type="password" id="modal-employee-password" placeholder="Senha">
-              
-              <select id="modal-employee-role">
-                <option value="dono">Dono</option>
-                <option value="gerente">Gerente</option>
-                <option value="supervisor">Supervisor</option>
-                <option value="estoquista">Estoquista</option>
-                <option value="leitor">Leitor</option>
-              </select>
-
-              <button onclick="saveEmployee()">Salvar</button>
-              <button onclick="closeEmployeeModal()">Cancelar</button>
-            </div>
-          </div>
-
-          <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Email</th>
-                        <th>Acesso</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody id="employee-table"></tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Seção Log -->
-        <div id="log-section" class="hidden">
-          <h2>Registro de Ações</h2>
-          <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Usuário</th>
-                        <th>Email</th>
-                        <th>Ação</th>
-                        <th>Data</th>
-                        <th>Hora</th>
-                    </tr>
-                </thead>
-                <tbody id="log-table"></tbody>
-            </table>
-          </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Acesso</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="employee-table"></tbody>
+          </table>
         </div>
       </div>
+
+      <div id="log-section" class="hidden">
+        <h2>Registro de Ações</h2>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Usuário</th>
+                <th>Email</th>
+                <th>Ação</th>
+                <th>Data</th>
+                <th>Hora</th>
+              </tr>
+            </thead>
+            <tbody id="log-table"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- Modal de Adição/Edição -->
   <div id="modal" class="modal">
     <div class="modal-content">
-      <!--<button class="close-modal" onclick="closeModal()">×</button>-->
       <h2 id="modal-title">Adicionar Produto</h2>
       <input type="text" id="modal-product-name" placeholder="Nome do Produto">
       <div class="input-number-container">
@@ -158,13 +148,17 @@
         <button class="btn-number decrement" onclick="decrement()">▼</button>
       </div>
       <input type="text" id="modal-product-category" placeholder="Categoria">
-      <!--<button onclick="saveProduct()" class="btn btn-add" style="width:100%;">Salvar</button>-->
       <button onclick="saveProduct()" class="salvarButton">Salvar</button>
       <button onclick="closeModal()" class="cancelarButton">Cancelar</button>
     </div>
   </div>
 
-  <!-- Script personalizado -->
-  <script src="script.js"></script>
+  <script src="config.js"></script>
+  <script src="auth.js"></script>
+  <script src="helpers.js"></script>
+  <script src="employees.js"></script>
+  <script src="log.js"></script>
+  <script src="dashboard.js"></script>
+  <script src="products.js"></script>
 </body>
 </html>
